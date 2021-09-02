@@ -2,6 +2,11 @@ set(src
     geometry.cc geometry.h
     random.cc random.h
     core.cc core.h
+
+    vector-utils.cc vector-utils.h
+    double.cc double.h
+
+    fillers/scan-line-hachure.cc fillers/scan-line-hachure.h
 )
 
 add_library(rough STATIC ${src})

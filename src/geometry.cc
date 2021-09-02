@@ -3,17 +3,12 @@
 #include <limits>
 #include <cmath>
 
+#include "double.h"
+
 
 // local functions
 namespace
 {
-    constexpr double pi = 3.141592653589793238462643383279502884;
-
-    bool isZero(double d)
-	{
-	    return std::abs(d) < 0.00001;
-	}
-
 	// Check if q lies on the line segment pr
 	bool onSegment(const Point& p, const Point& q, const Point& r) {
 	  return (
@@ -36,7 +31,20 @@ namespace
 	  return val > 0 ? 1 : 2;
 	}
 }
-//
+
+bool isSame(const Point& lhs, const Point& rhs) {
+  return isSame(lhs.x, rhs.x) && isSame(lhs.y, rhs.y);
+}
+
+bool operator==(const Point& lhs, const Point& rhs)
+{
+  return isSame(lhs, rhs);
+}
+
+bool operator!=(const Point& lhs, const Point& rhs)
+{
+  return !isSame(lhs, rhs);
+}
 
 template<typename Points, typename GetX, typename GetY, typename SetX, typename SetY>
 void tRotatePoints(Points* points, const Point& center, double degrees, GetX&& getx, GetY&& gety, SetX&& setx, SetY&& sety) {

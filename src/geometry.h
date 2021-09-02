@@ -9,6 +9,10 @@ struct Point
    double y;
 };
 
+bool isSame(const Point& lhs, const Point& rhs);
+bool operator==(const Point& lhs, const Point& rhs);
+bool operator!=(const Point& lhs, const Point& rhs);
+
 struct Line
 {
   Point from;
