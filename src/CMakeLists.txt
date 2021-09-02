@@ -1,6 +1,7 @@
 set(src
     geometry.cc geometry.h
     random.cc random.h
+    core.cc core.h
 )
 
 add_library(rough STATIC ${src})

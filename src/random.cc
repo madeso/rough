@@ -24,7 +24,7 @@ namespace
     return dis(random_generator());
   }
 }
-
+\
 int randomSeed() {
   return generate_random_int();
 }
