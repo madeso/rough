@@ -12,7 +12,7 @@ struct HachureFiller : PatternFiller {
 
   explicit HachureFiller(RenderHelper* helper);
 
-  OpSet fillPolygon(const std::vector<Point>& points, const ResolvedOptions& o);
+  virtual OpSet fillPolygon(const std::vector<Point>& points, const ResolvedOptions& o);
   OpSet _fillPolygon(const std::vector<Point>& points, const ResolvedOptions& o, bool connectEnds= false);
   std::vector<Op> renderLines(const std::vector<Line>& lines, const ResolvedOptions& o);
   std::vector<Line> connectingLines(const std::vector<Point>& polygon, const std::vector<Line>& lines);

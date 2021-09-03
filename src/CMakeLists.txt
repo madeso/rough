@@ -9,6 +9,7 @@ set(src
     fillers/filler-interface.cc fillers/filler-interface.h
     fillers/scan-line-hachure.cc fillers/scan-line-hachure.h
     fillers/hachure-filler.cc fillers/hachure-filler.h
+    fillers/zigzag-filler.cc fillers/zigzag-filler.h
 )
 
 add_library(rough STATIC ${src})
