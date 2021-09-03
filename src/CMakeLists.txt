@@ -21,4 +21,4 @@ target_link_libraries(rough
 target_include_directories(rough
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
 )
-source_group("" FILES ${src})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${src})
