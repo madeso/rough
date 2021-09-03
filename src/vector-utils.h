@@ -13,6 +13,14 @@ void sort(std::vector<T>& vec, SortFunction&& sortFunction)
         });
 }
 
+template<typename T, typename SortFunction>
+std::vector<T> sorted(const std::vector<T>& vec, SortFunction&& sortFunction)
+{
+    auto result = vec;
+    sort(result, sortFunction);
+    return result;
+}
+
 template<typename T, typename FilterFunction>
 std::vector<T> filter(const std::vector<T>& vec, FilterFunction&& filterFunction)
 {
@@ -22,3 +30,25 @@ std::vector<T> filter(const std::vector<T>& vec, FilterFunction&& filterFunction
     return result;
 }
 
+template<typename T>
+void insert(std::vector<T>* vec, const std::vector<T>& other)
+{
+    vec->insert(vec->end(), other.begin(), other.end());
+}
+
+template<typename TResult, typename TSource, typename TFunction>
+std::vector<TResult> map(const std::vector<TSource>& vec, TFunction&& function)
+{
+    std::vector<TResult> result;
+    result.reserve(vec.size());
+    std::transform(vec.begin(), vec.end(), std::back_inserter(result), function);
+    return result;
+}
+
+template<typename T>
+T pop_front(std::vector<T>* vec)
+{
+    const T result = vec->front();
+    vec->erase(vec->begin());
+    return result;
+}

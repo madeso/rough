@@ -15,4 +15,7 @@ struct RenderHelper {
   virtual double randOffsetWithRange(double min, double max, const ResolvedOptions& o) = 0;
   virtual OpSet ellipse(double x, double y, double width, double height, const ResolvedOptions& o) = 0;
   virtual std::vector<Op> doubleLineOps(double x1, double y1, double x2, double y2, const ResolvedOptions& o) = 0;
+  
+  std::vector<Op> doubleLineOps(const Point& p1, const Point& p2, const ResolvedOptions& o);
+  std::vector<Op> doubleLineOps(const Line& line, const ResolvedOptions& o);
 };

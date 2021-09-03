@@ -126,6 +126,11 @@ bool isPointInPolygon(const std::vector<Point>& points, double x, double y) {
   return (count % 2) == 1;
 }
 
+bool isPointInPolygon(const std::vector<Point>& points, const Point& p)
+{
+  return isPointInPolygon(points, p.x, p.y);
+}
+
 // Check is p1q1 intersects with p2q2
 bool doIntersect(const Point& p1, const Point& q1, const Point& p2, const Point& q2) {
   const auto o1 = orientation(p1, q1, p2);
@@ -158,4 +163,9 @@ bool doIntersect(const Point& p1, const Point& q1, const Point& p2, const Point&
   }
 
   return false;
+}
+
+bool doIntersect(const Point& p1, const Point& q1, const Line& line)
+{
+  return doIntersect(p1, q1, line.from, line.to);
 }
