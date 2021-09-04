@@ -14,6 +14,7 @@ set(src
     fillers/dot-filler.h fillers/dot-filler.cc
     fillers/hatch-filler.cc fillers/hatch-filler.h
     fillers/zigzag-line-filler.cc fillers/zigzag-line-filler.h
+    fillers/filler.cc fillers/filler.h
 )
 
 add_library(rough STATIC ${src})

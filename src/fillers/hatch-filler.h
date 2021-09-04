@@ -3,5 +3,6 @@
 #include "geometry.h"
 
 struct HatchFiller: HachureFiller {
+  HatchFiller(RenderHelper* rh);
   OpSet fillPolygon(const std::vector<Point>& points, const ResolvedOptions& o) override;
 };

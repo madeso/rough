@@ -15,6 +15,8 @@ struct DrawingSurface {
   double height; // also a SVGAnimatedLength?
 };
 
+enum class FillStyle { zigzag, crossHatch, dots, dashed, zigzagLine, hachure };
+
 struct Options {
   std::optional<double> maxRandomnessOffset;
   std::optional<double> roughness;
@@ -25,7 +27,7 @@ struct Options {
   std::optional<double> curveTightness;
   std::optional<double> curveStepCount;
   std::optional<std::string> fill;
-  std::optional<std::string> fillStyle;
+  std::optional<FillStyle> fillStyle; // default hachure
   std::optional<double> fillWeight;
   std::optional<double> hachureAngle;
   std::optional<double> hachureGap;
@@ -58,7 +60,7 @@ struct ResolvedOptions {
   double curveFitting;
   double curveTightness;
   double curveStepCount;
-  std::string fillStyle;
+  FillStyle fillStyle;
   double fillWeight;
   double hachureAngle;
   double hachureGap;
