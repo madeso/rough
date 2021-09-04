@@ -7,6 +7,10 @@ struct Point
 {
    double x;
    double y;
+
+   // todo(Gustav): remove this
+   const double& operator[](const int index) const;
+   double& operator[](const int index);
 };
 
 bool isSame(const Point& lhs, const Point& rhs);

@@ -10,7 +10,7 @@ struct ZigZagLineFiller: PatternFiller {
 
   ZigZagLineFiller(RenderHelper* helper);
 
-  OpSet fillPolygon(const std::vector<Point>& points, const ResolvedOptions& oo) override;
+  OpSet fillPolygon(const std::vector<Point>& points, ResolvedOptions& oo) override;
 
-  std::vector<Op> zigzagLines(const std::vector<Line>& lines, double zo, const ResolvedOptions& o);
+  std::vector<Op> zigzagLines(const std::vector<Line>& lines, double zo, ResolvedOptions& o);
 };

@@ -2,8 +2,36 @@
 
 #include <limits>
 #include <cmath>
+#include <stdexcept>
 
 #include "double.h"
+
+
+const double& Point::operator[](const int index) const
+{
+  switch(index)
+  {
+    case 0:
+      return x;
+    case 1:
+      return y;
+    default:
+      throw std::out_of_range("Point::operator[]");
+  }
+}
+
+double& Point::operator[](const int index)
+{
+  switch(index)
+  {
+    case 0:
+      return x;
+    case 1:
+      return y;
+    default:
+      throw std::out_of_range("Point::operator[]");
+  }
+}
 
 
 // local functions

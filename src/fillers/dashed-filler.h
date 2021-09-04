@@ -9,6 +9,6 @@ struct DashedFiller: PatternFiller {
   RenderHelper* helper;
 
   DashedFiller(RenderHelper* helper);
-  OpSet fillPolygon(const std::vector<Point>& points, const ResolvedOptions& o) override;
-  std::vector<Op> dashedLine(const std::vector<Line>& lines, const ResolvedOptions& o);
+  OpSet fillPolygon(const std::vector<Point>& points, ResolvedOptions& o) override;
+  std::vector<Op> dashedLine(const std::vector<Line>& lines, ResolvedOptions& o);
 };

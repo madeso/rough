@@ -10,6 +10,6 @@ struct DotFiller: PatternFiller {
 
   DotFiller(RenderHelper* helper);
 
-  OpSet fillPolygon(const std::vector<Point>& points, const ResolvedOptions& oo) override;
-  OpSet dotsOnLines(const std::vector<Line>& lines, const ResolvedOptions& o);
+  OpSet fillPolygon(const std::vector<Point>& points, ResolvedOptions& oo) override;
+  OpSet dotsOnLines(const std::vector<Line>& lines, ResolvedOptions& o);
 };

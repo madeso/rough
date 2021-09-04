@@ -52,7 +52,7 @@ struct Config {
 };
 
 struct ResolvedOptions {
-  double maxRandomnessOffset;
+  double maxRandomnessOffset; // || 1
   double roughness;
   double bowing;
   std::string stroke;
@@ -67,7 +67,7 @@ struct ResolvedOptions {
   double dashOffset;
   double dashGap;
   double zigzagOffset;
-  double seed;
+  int seed;
   bool combineNestedSvgPaths;
   std::optional<Random> randomizer;
   bool disableMultiStroke;
