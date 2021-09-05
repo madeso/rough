@@ -20,7 +20,7 @@ struct ActiveEdgeEntry {
 //  return std::floor(x + 0.5);
 // }
 
-std::vector<Line> straightHachureLines(const std::vector<Point>& points, const ResolvedOptions& o) {
+std::vector<Line> straightHachureLines(const std::vector<Point>& points, const Options& o) {
   auto vertices = points;
   if (vertices[0] != vertices[vertices.size() - 1]) {
     vertices.push_back(vertices[0]);
@@ -130,7 +130,7 @@ std::vector<Line> straightHachureLines(const std::vector<Point>& points, const R
 
 
 
-std::vector<Line> polygonHachureLines(const std::vector<Point>& ppoints, const ResolvedOptions& o) {
+std::vector<Line> polygonHachureLines(const std::vector<Point>& ppoints, const Options& o) {
     auto points = ppoints;
   const auto rotationCenter = Point{0, 0};
   const auto angle = round(o.hachureAngle + 90);

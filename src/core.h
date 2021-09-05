@@ -15,64 +15,38 @@ struct DrawingSurface {
   double height; // also a SVGAnimatedLength?
 };
 
-enum class FillStyle { zigzag, crossHatch, dots, dashed, zigzagLine, hachure };
+enum class FillStyle { solid, zigzag, crossHatch, dots, dashed, zigzagLine, hachure };
 
-struct Options {
-  std::optional<double> maxRandomnessOffset;
-  std::optional<double> roughness;
-  std::optional<double> bowing;
-  std::optional<std::string> stroke;
-  std::optional<double> strokeWidth;
-  std::optional<double> curveFitting;
-  std::optional<double> curveTightness;
-  std::optional<double> curveStepCount;
-  std::optional<std::string> fill;
-  std::optional<FillStyle> fillStyle; // default hachure
-  std::optional<double> fillWeight;
-  std::optional<double> hachureAngle;
-  std::optional<double> hachureGap;
+struct Options {  
   std::optional<double> simplification;
-  std::optional<double> dashOffset;
-  std::optional<double> dashGap;
-  std::optional<double> zigzagOffset;
-  std::optional<double> seed;
-  std::optional<bool> combineNestedSvgPaths;
   std::optional<std::vector<double>> strokeLineDash;
   std::optional<double> strokeLineDashOffset;
   std::optional<std::vector<double>> fillLineDash;
   std::optional<double> fillLineDashOffset;
-  std::optional<bool> disableMultiStroke;
-  std::optional<bool> disableMultiStrokeFill;
-  std::optional<bool> preserveVertices;
   std::optional<double> fixedDecimalPlaceDigits;
-};
 
-struct Config {
-  std::optional<Options> options;
-};
-
-struct ResolvedOptions {
-  double maxRandomnessOffset; // || 1
-  double roughness;
-  double bowing;
-  std::string stroke;
-  double strokeWidth;
-  double curveFitting;
-  double curveTightness;
-  double curveStepCount;
-  FillStyle fillStyle;
-  double fillWeight;
-  double hachureAngle;
-  double hachureGap;
-  double dashOffset;
-  double dashGap;
-  double zigzagOffset;
-  int seed;
-  bool combineNestedSvgPaths;
+  std::optional<std::string> fill;
+  double maxRandomnessOffset = 2; // or 1
+  double roughness = 1;
+  double bowing = 1;
+  std::string stroke = "#000";
+  double strokeWidth = 1;
+  double curveFitting = 0;
+  double curveTightness = 0.95;
+  double curveStepCount = 9;
+  FillStyle fillStyle = FillStyle::hachure;
+  double fillWeight = -1;
+  double hachureAngle = -41;
+  double hachureGap = -1;
+  double dashOffset = -1;
+  double dashGap = -1;
+  double zigzagOffset = -1;
+  int seed = 0;
+  bool combineNestedSvgPaths = false;
+  bool disableMultiStroke = false;
+  bool disableMultiStrokeFill = false;
+  bool preserveVertices = false;
   std::optional<Random> randomizer;
-  bool disableMultiStroke;
-  bool disableMultiStrokeFill;
-  bool preserveVertices;
 };
 
 enum class OpType { move, bcurveTo, lineTo};
@@ -90,9 +64,11 @@ struct OpSet {
   std::optional<std::string> path;
 };
 
+enum class ShapeType {circle, line, rectangle, ellipse, linearPath, arc, curve, polygon };
+
 struct Drawable {
-  std::string shape;
-  ResolvedOptions options;
+  ShapeType shape;
+  std::optional<Options> options;
   std::vector<OpSet> sets;
 };
 

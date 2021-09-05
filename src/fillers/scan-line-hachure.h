@@ -3,4 +3,4 @@
 #include "../geometry.h"
 #include "../core.h"
 
-std::vector<Line> polygonHachureLines(const std::vector<Point>& points, const ResolvedOptions& o);
+std::vector<Line> polygonHachureLines(const std::vector<Point>& points, const Options& o);

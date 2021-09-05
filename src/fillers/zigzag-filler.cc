@@ -5,6 +5,6 @@ ZigZagFiller::ZigZagFiller(RenderHelper* rh)
 {
 }
 
-OpSet ZigZagFiller::fillPolygon(const std::vector<Point>& points, ResolvedOptions& o) {
+OpSet ZigZagFiller::fillPolygon(const std::vector<Point>& points, Options& o) {
   return this->_fillPolygon(points, o, true);
 }

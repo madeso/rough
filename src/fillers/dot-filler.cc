@@ -7,7 +7,7 @@ DotFiller::DotFiller(RenderHelper* helper) {
   this->helper = helper;
 }
 
-OpSet DotFiller::fillPolygon(const std::vector<Point>& points, ResolvedOptions& oo) {
+OpSet DotFiller::fillPolygon(const std::vector<Point>& points, Options& oo) {
   auto o = oo;
   o.curveStepCount = 4;
   o.hachureAngle = 0;
@@ -16,7 +16,7 @@ OpSet DotFiller::fillPolygon(const std::vector<Point>& points, ResolvedOptions& 
   return this->dotsOnLines(lines, o);
 }
 
-OpSet DotFiller::dotsOnLines(const std::vector<Line>& lines, ResolvedOptions& o) {
+OpSet DotFiller::dotsOnLines(const std::vector<Line>& lines, Options& o) {
   std::vector<Op> ops;
   auto gap = o.hachureGap;
   if (gap < 0) {

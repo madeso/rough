@@ -15,7 +15,7 @@
 // so we currently don't cache them
 // todo(Gustav): look into this
 
-std::unique_ptr<PatternFiller> getFiller(const ResolvedOptions& o, RenderHelper* helper) {
+std::unique_ptr<PatternFiller> getFiller(const Options& o, RenderHelper* helper) {
   switch (o.fillStyle) {
     case FillStyle::zigzag:
       return std::make_unique<ZigZagFiller>(helper);

@@ -4,5 +4,5 @@
 
 struct HatchFiller: HachureFiller {
   HatchFiller(RenderHelper* rh);
-  OpSet fillPolygon(const std::vector<Point>& points, ResolvedOptions& o) override;
+  OpSet fillPolygon(const std::vector<Point>& points, Options& o) override;
 };

@@ -1,9 +1,9 @@
 #pragma once
 
 struct PatternFiller;
-struct ResolvedOptions;
+struct Options;
 struct RenderHelper;
 
 #include <memory>
 
-std::unique_ptr<PatternFiller> getFiller(const ResolvedOptions& o, RenderHelper* helper);
+std::unique_ptr<PatternFiller> getFiller(const Options& o, RenderHelper* helper);
