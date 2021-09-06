@@ -119,6 +119,9 @@ struct TestRunner
 void run_tests(TestRunner* runner)
 {
     runner->add("rectangle", rectangle_test());
+    runner->add("polygon", polygon_test());
+    runner->add("ellipse", ellipse_test());
+    runner->add("line", line_test());
 }
 
 int main(int argc, char** argv)

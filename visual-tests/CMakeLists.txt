@@ -1,5 +1,8 @@
 
 set(svg_src
+    svg/ellipse.cc
+    svg/line.cc
+    svg/polygon.cc
     svg/rectangle.cc
 
     svg/tests.h

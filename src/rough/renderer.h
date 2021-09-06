@@ -8,9 +8,9 @@
 #include "rough/fillers/filler-interface.h"
 
 struct EllipseParams {
+  double increment;
   double rx;
   double ry;
-  double increment;
 };
 
 struct EllipseResult {

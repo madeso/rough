@@ -31,7 +31,7 @@ namespace svg
   ElementRef make_element(const std::string& name)
   {
     return std::make_shared<Element>(name);
-  }
+  }\
 }
 
 void RoughSVG::draw(const Drawable& drawable) {
