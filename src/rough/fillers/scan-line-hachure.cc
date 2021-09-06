@@ -39,7 +39,7 @@ std::vector<Line> straightHachureLines(const std::vector<Point>& points, const O
     for (size_t i = 0; i < vertices.size() - 1; i++) {
       const auto p1 = vertices[i];
       const auto p2 = vertices[i + 1];
-      if (isSame(p1.y, p2.y)) {
+      if (!isSame(p1.y, p2.y)) {
         const auto ymin = std::min(p1.y, p2.y);
         edges.push_back({
           ymin,
