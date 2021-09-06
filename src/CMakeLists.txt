@@ -8,7 +8,7 @@ set(src
 
     renderer.cc renderer.h
 
-    generator.cc
+    generator.cc generator.h
 
     fillers/filler-interface.cc fillers/filler-interface.h
     fillers/scan-line-hachure.cc fillers/scan-line-hachure.h
