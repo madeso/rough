@@ -1,7 +1,8 @@
 #include "dot-filler.h"
 
 #include <cmath>
-#include "vector-utils.h"
+
+#include "rough/vector-utils.h"
 
 DotFiller::DotFiller(RenderHelper* helper) {
   this->helper = helper;

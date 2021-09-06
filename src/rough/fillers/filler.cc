@@ -1,17 +1,17 @@
-#include "filler.h"
+#include "rough/fillers/filler.h"
 
 #include <cassert>
 
-#include "core.h"
-#include "filler-interface.h"
-#include "hachure-filler.h"
-#include "zigzag-filler.h"
-#include "hatch-filler.h"
-#include "dot-filler.h"
-#include "dashed-filler.h"
-#include "zigzag-line-filler.h"
+#include "rough/core.h"
+#include "rough/fillers/filler-interface.h"
+#include "rough/fillers/hachure-filler.h"
+#include "rough/fillers/zigzag-filler.h"
+#include "rough/fillers/hatch-filler.h"
+#include "rough/fillers/dot-filler.h"
+#include "rough/fillers/dashed-filler.h"
+#include "rough/fillers/zigzag-line-filler.h"
 
-// orginal code caches the fillers in a static array, but this is bad
+// original code caches the fillers in a static array, but this is bad
 // so we currently don't cache them
 // todo(Gustav): look into this
 

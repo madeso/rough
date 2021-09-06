@@ -1,10 +1,10 @@
-#include "geometry.h"
+#include "rough/geometry.h"
 
 #include <limits>
 #include <cmath>
 #include <stdexcept>
 
-#include "double.h"
+#include "rough/double.h"
 
 
 const double& Point::operator[](const int index) const

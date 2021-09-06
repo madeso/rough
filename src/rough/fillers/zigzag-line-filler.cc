@@ -2,8 +2,8 @@
 
 #include <cmath>
 
-#include "vector-utils.h"
-#include "double.h"
+#include "rough/vector-utils.h"
+#include "rough/double.h"
 
 ZigZagLineFiller::ZigZagLineFiller(RenderHelper* helper) {
   this->helper = helper;

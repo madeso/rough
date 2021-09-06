@@ -2,10 +2,10 @@
 
 #include <map>
 
-#include "core.h"
-#include "generator.h"
-#include "geometry.h"
-#include "vector-utils.h"
+#include "rough/core.h"
+#include "rough/generator.h"
+#include "rough/geometry.h"
+#include "rough/vector-utils.h"
 
 namespace svg
 {

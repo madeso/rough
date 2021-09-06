@@ -1,4 +1,4 @@
-#include "zigzag-filler.h"
+#include "rough/fillers/zigzag-filler.h"
 
 ZigZagFiller::ZigZagFiller(RenderHelper* rh)
   : HachureFiller(rh)

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "core.h"
-#include "geometry.h"
-#include "fillers/filler.h"
-#include "fillers/filler-interface.h"
-#include "math.h"
+#include <cmath>
 
+#include "rough/core.h"
+#include "rough/geometry.h"
+#include "rough/fillers/filler.h"
+#include "rough/fillers/filler-interface.h"
 
 struct EllipseParams {
   double rx;

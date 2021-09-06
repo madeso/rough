@@ -1,7 +1,7 @@
-#include "scan-line-hachure.h"
+#include "rough/fillers/scan-line-hachure.h"
 
-#include "double.h"
-#include "vector-utils.h"
+#include "rough/double.h"
+#include "rough/vector-utils.h"
 
 struct EdgeEntry {
   double ymin;

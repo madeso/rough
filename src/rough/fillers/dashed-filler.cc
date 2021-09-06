@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-#include "vector-utils.h"
+#include "rough/vector-utils.h"
 
 DashedFiller::DashedFiller(RenderHelper* helper) {
   this->helper = helper;

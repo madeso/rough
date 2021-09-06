@@ -1,6 +1,7 @@
-#include "hachure-filler.h"
-#include "core.h"
-#include "geometry.h"
+#include "rough/fillers/hachure-filler.h"
+
+#include "rough/core.h"
+#include "rough/geometry.h"
 
 struct HatchFiller: HachureFiller {
   HatchFiller(RenderHelper* rh);

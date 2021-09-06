@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 
-#include "random.h"
-#include "geometry.h"
+#include "rough/random.h"
+#include "rough/geometry.h"
 
 // const SVGNS = 'http://www.w3.org/2000/svg';
 

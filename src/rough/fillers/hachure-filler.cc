@@ -1,10 +1,11 @@
-#include "hachure-filler.h"
+#include "rough/fillers/hachure-filler.h"
 
-#include "filler-interface.h"
-#include "core.h"
-#include "geometry.h"
-#include "scan-line-hachure.h"
-#include "vector-utils.h"
+#include "rough/core.h"
+#include "rough/geometry.h"
+#include "rough/vector-utils.h"
+
+#include "rough/fillers/filler-interface.h"
+#include "rough/fillers/scan-line-hachure.h"
 
 struct IntersectionInfo {
   Point point;

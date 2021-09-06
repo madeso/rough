@@ -1,6 +1,6 @@
-#include "hatch-filler.h"
+#include "rough/fillers/hatch-filler.h"
 
-#include "vector-utils.h"
+#include "rough/vector-utils.h"
 
 HatchFiller::HatchFiller(RenderHelper* rh)
   : HachureFiller(rh)

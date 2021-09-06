@@ -1,4 +1,4 @@
-#include "filler-interface.h"
+#include "rough/fillers/filler-interface.h"
 
 std::vector<Op> RenderHelper::doubleLineOps(const Point& p1, const Point& p2, Options& o)
 {

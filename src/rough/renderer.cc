@@ -1,16 +1,10 @@
 #include "renderer.h"
 
-// #include "core.h"
-// #include "geometry.h"
-// #include "fillers/filler.h"
-// #include "fillers/filler-interface.h"
-// #include "math.h"
-
 #include <cmath>
 #include <array>
 
-#include "double.h"
-#include "vector-utils.h"
+#include "rough/double.h"
+#include "rough/vector-utils.h"
 
 
 struct ComputedEllipsePoints

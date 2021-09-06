@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-#include "vector-utils.h"
+#include "rough/vector-utils.h"
 
 namespace svg
 {

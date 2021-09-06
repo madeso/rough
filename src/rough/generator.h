@@ -2,10 +2,10 @@
 
 #include <optional>
 
-#include "core.h"
-#include "geometry.h"
-#include "renderer.h"
-#include "math.h"
+#include "rough/core.h"
+#include "rough/geometry.h"
+#include "rough/renderer.h"
+#include <cmath>
 
 struct RoughGenerator
 {

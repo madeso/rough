@@ -1,9 +1,10 @@
 #pragma once
 
-#include "filler-interface.h"
-#include "core.h"
-#include "geometry.h"
-#include "scan-line-hachure.h"
+#include "rough/core.h"
+#include "rough/geometry.h"
+
+#include "rough/fillers/filler-interface.h"
+#include "rough/fillers/scan-line-hachure.h"
 
 struct DotFiller: PatternFiller {
   RenderHelper* helper;
