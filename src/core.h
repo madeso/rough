@@ -23,7 +23,7 @@ struct Options {
   std::optional<double> strokeLineDashOffset;
   std::optional<std::vector<double>> fillLineDash;
   std::optional<double> fillLineDashOffset;
-  std::optional<double> fixedDecimalPlaceDigits;
+  std::optional<int> fixedDecimalPlaceDigits;
 
   std::optional<std::string> fill;
   double maxRandomnessOffset = 2; // or 1
@@ -68,7 +68,7 @@ enum class ShapeType {circle, line, rectangle, ellipse, linearPath, arc, curve, 
 
 struct Drawable {
   ShapeType shape;
-  std::optional<Options> options;
+  Options options;
   std::vector<OpSet> sets;
 };
 

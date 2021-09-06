@@ -5,10 +5,10 @@ set(src
 
     vector-utils.cc vector-utils.h
     double.cc double.h
-
     renderer.cc renderer.h
-
     generator.cc generator.h
+
+    svg.cc
 
     fillers/filler-interface.cc fillers/filler-interface.h
     fillers/scan-line-hachure.cc fillers/scan-line-hachure.h

@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <string>
 
 template<typename T, typename SortFunction>
 void sort(std::vector<T>& vec, SortFunction&& sortFunction)
@@ -50,5 +51,25 @@ T pop_front(std::vector<T>* vec)
 {
     const T result = vec->front();
     vec->erase(vec->begin());
+    return result;
+}
+
+template<typename T>
+std::string join(const std::vector<T>& vec, const std::string& separator, const std::string& prefix="", const std::string& suffix="")
+{
+    if (vec.empty())
+    {
+        return prefix + suffix;
+    }
+    
+    std::string result = prefix;
+    result += std::to_string(vec[0]);
+    for (size_t i = 1; i < vec.size(); ++i)
+    {
+        result += separator;
+        result += std::to_string(vec[i]);
+    }
+    result += suffix;
+
     return result;
 }

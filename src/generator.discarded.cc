@@ -55,24 +55,7 @@ void pointsOnPath(); // from points-on-path
 
 
   
-  std::string opsToPath(const OpSet& drawing, std::optional<double> fixedDecimals) {
-    auto path = '';
-    for (const auto& item: drawing.ops) {
-      const auto data = ((typeof fixedDecimals == 'double') && fixedDecimals >= 0) ? (item.data.map((d) => +d.toFixed(fixedDecimals))) : item.data;
-      switch (item.op) {
-        case OpType::move:
-          path += `M${data[0]} ${data[1]} `;
-          break;
-        case OpType::bcurveTo:
-          path += `C${data[0]} ${data[1]}, ${data[2]} ${data[3]}, ${data[4]} ${data[5]} `;
-          break;
-        case OpType::lineTo:
-          path += `L${data[0]} ${data[1]} `;
-          break;
-      }
-    }
-    return path.trim();
-  }
+  
 
   std::vector<PathInfo> toPaths(Drawable drawable) {
     const auto& sets = drawable.sets;
