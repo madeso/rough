@@ -17,11 +17,11 @@ HachureFiller::HachureFiller(RenderHelper* helper) {
   this->helper = helper;
 }
 
-OpSet HachureFiller::fillPolygon(const std::vector<Point>& points, Options& o) {
+OpSet HachureFiller::fillPolygon(const std::vector<Point>& points, const Options& o) {
   return this->_fillPolygon(points, o);
 }
 
-OpSet HachureFiller::_fillPolygon(const std::vector<Point>& points, Options& o, bool connectEnds) {
+OpSet HachureFiller::_fillPolygon(const std::vector<Point>& points, const Options& o, bool connectEnds) {
   auto lines = polygonHachureLines(points, o);
   if (connectEnds) {
     const auto connectingLines = this->connectingLines(points, lines);
@@ -31,7 +31,7 @@ OpSet HachureFiller::_fillPolygon(const std::vector<Point>& points, Options& o, 
   return OpSet{ OpSetType::fillSketch, ops };
 }
 
-std::vector<Op> HachureFiller::renderLines(const std::vector<Line>& lines, Options& o) {
+std::vector<Op> HachureFiller::renderLines(const std::vector<Line>& lines, const Options& o) {
   std::vector<Op> ops;
   for (const auto& line: lines) {
     insert(&ops, this->helper->doubleLineOps(line, o));

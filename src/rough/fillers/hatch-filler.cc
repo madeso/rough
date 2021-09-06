@@ -7,7 +7,7 @@ HatchFiller::HatchFiller(RenderHelper* rh)
 {
 }
 
-OpSet HatchFiller::fillPolygon(const std::vector<Point>& points, Options& o) {
+OpSet HatchFiller::fillPolygon(const std::vector<Point>& points, const Options& o) {
   auto set = this->_fillPolygon(points, o);
   auto o2 = o; o2.hachureAngle += 90;
   const auto set2 = this->_fillPolygon(points, o2);

@@ -9,7 +9,7 @@ ZigZagLineFiller::ZigZagLineFiller(RenderHelper* helper) {
   this->helper = helper;
 }
 
-OpSet ZigZagLineFiller::fillPolygon(const std::vector<Point>& points, Options& oo) {
+OpSet ZigZagLineFiller::fillPolygon(const std::vector<Point>& points, const Options& oo) {
   auto o = oo;
   const auto gap = o.hachureGap < 0 ? (o.strokeWidth * 4) : o.hachureGap;
   const auto zo = o.zigzagOffset < 0 ? gap : o.zigzagOffset;
@@ -18,7 +18,7 @@ OpSet ZigZagLineFiller::fillPolygon(const std::vector<Point>& points, Options& o
   return { OpSetType::fillSketch, this->zigzagLines(lines, zo, o) };
 }
 
-std::vector<Op> ZigZagLineFiller::zigzagLines(const std::vector<Line>& lines, double zo, Options& o) {
+std::vector<Op> ZigZagLineFiller::zigzagLines(const std::vector<Line>& lines, double zo, const Options& o) {
   std::vector<Op>  ops;
   for(const auto& line: lines){
     const auto length = lineLength(line);

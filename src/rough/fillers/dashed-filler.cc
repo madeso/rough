@@ -8,12 +8,12 @@ DashedFiller::DashedFiller(RenderHelper* helper) {
   this->helper = helper;
 }
 
-OpSet DashedFiller::fillPolygon(const std::vector<Point>& points, Options& o) {
+OpSet DashedFiller::fillPolygon(const std::vector<Point>& points, const Options& o) {
   const auto lines = polygonHachureLines(points, o);
   return OpSet{ OpSetType::fillSketch, this->dashedLine(lines, o) };
 }
 
-std::vector<Op> DashedFiller::dashedLine(const std::vector<Line>& lines, Options& o) {
+std::vector<Op> DashedFiller::dashedLine(const std::vector<Line>& lines, const Options& o) {
   const auto offset = o.dashOffset < 0 ? (o.hachureGap < 0 ? (o.strokeWidth * 4) : o.hachureGap) : o.dashOffset;
   const auto gap = o.dashGap < 0 ? (o.hachureGap < 0 ? (o.strokeWidth * 4) : o.hachureGap) : o.dashGap;
   std::vector<Op> ops;

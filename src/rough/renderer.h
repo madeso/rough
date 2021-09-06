@@ -18,10 +18,10 @@ struct EllipseResult {
   std::vector<Point> estimatedPoints;
 };
 
-OpSet line(double x1, double y1, double x2, double y2, Options& o);
-OpSet linearPath(const std::vector<Point>& points, bool close, Options& o);
-OpSet polygon(const std::vector<Point>& points, Options& o);
-OpSet rectangle(double x, double y, double width, double height, Options& o);
+OpSet line(double x1, double y1, double x2, double y2, const Options& o);
+OpSet linearPath(const std::vector<Point>& points, bool close, const Options& o);
+OpSet polygon(const std::vector<Point>& points, const Options& o);
+OpSet rectangle(double x, double y, double width, double height, const Options& o);
 OpSet curve(const std::vector<Point>& points, const Options& o);
 OpSet ellipse(double x, double y, double width, double height, const Options& o);
 EllipseParams generateEllipseParams(double width, double height, const Options& o);
@@ -37,8 +37,8 @@ OpSet svgPath(string path, const Options& o);
 // Fills
 
 OpSet solidFillPolygon(const std::vector<Point>& points, const Options& o);
-OpSet patternFillPolygon(const std::vector<Point>& points, Options& o);
+OpSet patternFillPolygon(const std::vector<Point>& points, const Options& o);
 OpSet patternFillArc(double x, double y, double width, double height, double start, double stop, const Options& o);
 double randOffset(double x, const Options& o);
 double randOffsetWithRange(double min, double max, const Options& o);
-std::vector<Op> doubleLineFillOps(double x1, double y1, double x2, double y2, Options& o);
+std::vector<Op> doubleLineFillOps(double x1, double y1, double x2, double y2, const Options& o);

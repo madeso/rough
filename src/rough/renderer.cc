@@ -16,15 +16,15 @@ struct ComputedEllipsePoints
 Options cloneOptionsAlterSeed(const Options& ops);
 
 double random(Options& ops);
-double _offset(double min, double max, Options& ops, double roughnessGain = 1.0);
-double _offsetOpt(double x, Options& ops, double roughnessGain = 1.0);
-std::vector<Op> _doubleLine(double x1, double y1, double x2, double y2, Options& o, bool filling = false);
-std::vector<Op> _line(double x1, double y1, double x2, double y2, Options& o, bool move, bool overlay);
-std::vector<Op> _curveWithOffset(const std::vector<Point>&  points, double offset, Options& o);
-std::vector<Op> _curve(const std::vector<Point>&  points, std::optional<Point> closePoint, Options& o);
-ComputedEllipsePoints _computeEllipsePoints(double increment, double cx, double cy, double rx, double ry, double offset, double overlap, Options& o);
-std::vector<Op> _arc(double increment, double cx, double cy, double rx, double ry, double strt, double stp, double offset, Options& o);
-std::vector<Op> _bezierTo(double x1, double y1, double x2, double y2, double x, double y, Point current, Options& o);
+double _offset(double min, double max, const Options& ops, double roughnessGain = 1.0);
+double _offsetOpt(double x, const Options& ops, double roughnessGain = 1.0);
+std::vector<Op> _doubleLine(double x1, double y1, double x2, double y2, const Options& o, bool filling = false);
+std::vector<Op> _line(double x1, double y1, double x2, double y2, const Options& o, bool move, bool overlay);
+std::vector<Op> _curveWithOffset(const std::vector<Point>&  points, double offset, const Options& o);
+std::vector<Op> _curve(const std::vector<Point>&  points, std::optional<Point> closePoint, const Options& o);
+ComputedEllipsePoints _computeEllipsePoints(double increment, double cx, double cy, double rx, double ry, double offset, double overlap, const Options& o);
+std::vector<Op> _arc(double increment, double cx, double cy, double rx, double ry, double strt, double stp, double offset, const Options& o);
+std::vector<Op> _bezierTo(double x1, double y1, double x2, double y2, double x, double y, Point current, const Options& o);
 
 
 struct RenderHelperImpl : RenderHelper
@@ -41,7 +41,7 @@ struct RenderHelperImpl : RenderHelper
   {
     return ::ellipse(x, y, width, height, o);
   }
-  std::vector<Op> doubleLineOps(double x1, double y1, double x2, double y2, Options& o) override
+  std::vector<Op> doubleLineOps(double x1, double y1, double x2, double y2, const Options& o) override
   {
     return ::doubleLineFillOps(x1, y1, x2, y2, o);
   }
@@ -57,11 +57,11 @@ namespace
   }
 }
 
-OpSet line(double x1, double y1, double x2, double y2, Options& o) {
+OpSet line(double x1, double y1, double x2, double y2, const Options& o) {
   return { OpSetType::path, _doubleLine(x1, y1, x2, y2, o) };
 }
 
-OpSet linearPath(const std::vector<Point>& points, bool close, Options& o) {
+OpSet linearPath(const std::vector<Point>& points, bool close, const Options& o) {
   const auto len = points.size();
   if (len > 2) {
     std::vector<Op> ops;
@@ -78,11 +78,11 @@ OpSet linearPath(const std::vector<Point>& points, bool close, Options& o) {
   return { OpSetType::path };
 }
 
-OpSet polygon(const std::vector<Point>& points, Options& o) {
+OpSet polygon(const std::vector<Point>& points, const Options& o) {
   return linearPath(points, true, o);
 }
 
-OpSet rectangle(double x, double y, double width, double height, Options& o) {
+OpSet rectangle(double x, double y, double width, double height, const Options& o) {
   const std::vector<Point> points = {
     {x, y},
     {x + width, y},
@@ -92,7 +92,7 @@ OpSet rectangle(double x, double y, double width, double height, Options& o) {
   return polygon(points, o);
 }
 
-OpSet curve(const std::vector<Point>& points, Options& o) {
+OpSet curve(const std::vector<Point>& points, const Options& o) {
   auto o1 = _curveWithOffset(points, 1 * (1 + o.roughness * 0.2), o);
   if (!o.disableMultiStroke) {
     auto co = cloneOptionsAlterSeed(o);
@@ -103,11 +103,11 @@ OpSet curve(const std::vector<Point>& points, Options& o) {
 }
 
 OpSet ellipse(double x, double y, double width, double height, const Options& o) {
-  const auto params = generateEllipseParams(width, height, o);
+  auto params = generateEllipseParams(width, height, o);
   return ellipseWithParams(x, y, o, params).opset;
 }
 
-EllipseParams generateEllipseParams(double width, double height, Options& o) {
+EllipseParams generateEllipseParams(double width, double height, const Options& o) {
   const auto psq = std::sqrt(pi * 2 * std::sqrt((std::pow(width / 2, 2) + std::pow(height / 2, 2)) / 2));
   const auto stepCount = std::max(o.curveStepCount, (o.curveStepCount / std::sqrt(200)) * psq);
   const auto increment = (pi * 2) / stepCount;
@@ -119,7 +119,7 @@ EllipseParams generateEllipseParams(double width, double height, Options& o) {
   return { increment, rx, ry };
 }
 
-EllipseResult ellipseWithParams(double x, double y, Options& o, const EllipseParams& ellipseParams) {
+EllipseResult ellipseWithParams(double x, double y, const Options& o, const EllipseParams& ellipseParams) {
   const auto [ap1, cp1] = _computeEllipsePoints(ellipseParams.increment, x, y, ellipseParams.rx, ellipseParams.ry, 1, ellipseParams.increment * _offset(0.1, _offset(0.4, 1, o), o), o);
   auto o1 = _curve(ap1, {}, o);
   if (!o.disableMultiStroke) {
@@ -133,7 +133,7 @@ EllipseResult ellipseWithParams(double x, double y, Options& o, const EllipsePar
   };
 }
 
-OpSet arc(double x, double y, double width, double height, double start, double stop, bool closed, bool roughClosure, Options& o) {
+OpSet arc(double x, double y, double width, double height, double start, double stop, bool closed, bool roughClosure, const Options& o) {
   const auto cx = x;
   const auto cy = y;
   auto rx = std::abs(width / 2);
@@ -209,7 +209,7 @@ OpSet svgPath(string path, esolvedOptions& o) {
 
 // Fills
 
-OpSet solidFillPolygon(const std::vector<Point>&  points, Options& o) {
+OpSet solidFillPolygon(const std::vector<Point>&  points, const Options& o) {
   std::vector<Op>  ops;
   if (points.size()) {
     const auto offset = o.maxRandomnessOffset || 0;
@@ -224,11 +224,11 @@ OpSet solidFillPolygon(const std::vector<Point>&  points, Options& o) {
   return { OpSetType::fillPath, ops };
 }
 
-OpSet patternFillPolygon(const std::vector<Point>& points, Options& o) {
+OpSet patternFillPolygon(const std::vector<Point>& points, const Options& o) {
   return getFiller(o, helper())->fillPolygon(points, o);
 }
 
-OpSet patternFillArc(double x, double y, double width, double height, double start, double stop, Options& o) {
+OpSet patternFillArc(double x, double y, double width, double height, double start, double stop, const Options& o) {
   const auto cx = x;
   const auto cy = y;
   auto rx = std::abs(width / 2);
@@ -255,15 +255,15 @@ OpSet patternFillArc(double x, double y, double width, double height, double sta
   return patternFillPolygon(points, o);
 }
 
-double randOffset(double x, Options& o) {
+double randOffset(double x, const Options& o) {
   return _offsetOpt(x, o);
 }
 
-double randOffsetWithRange(double min, double max, Options& o) {
+double randOffsetWithRange(double min, double max, const Options& o) {
   return _offset(min, max, o);
 }
 
-std::vector<Op> doubleLineFillOps(double x1, double y1, double x2, double y2, Options& o) {
+std::vector<Op> doubleLineFillOps(double x1, double y1, double x2, double y2, const Options& o) {
   return _doubleLine(x1, y1, x2, y2, o, true);
 }
 
@@ -278,22 +278,22 @@ Options cloneOptionsAlterSeed(const Options& ops) {
   return result;
 }
 
-double random(Options& ops) {
+double random(const Options& ops) {
   if (!ops.randomizer) {
     ops.randomizer = Random(ops.seed);
   }
   return ops.randomizer->next();
 }
 
-double _offset(double min, double max, Options& ops, double roughnessGain) {
+double _offset(double min, double max, const Options& ops, double roughnessGain) {
   return ops.roughness * roughnessGain * ((random(ops) * (max - min)) + min);
 }
 
-double _offsetOpt(double x, Options& ops, double roughnessGain) {
+double _offsetOpt(double x, const Options& ops, double roughnessGain) {
   return _offset(-x, x, ops, roughnessGain);
 }
 
-std::vector<Op> _doubleLine(double x1, double y1, double x2, double y2, Options& o, bool filling) {
+std::vector<Op> _doubleLine(double x1, double y1, double x2, double y2, const Options& o, bool filling) {
   const auto singleStroke = filling ? o.disableMultiStrokeFill : o.disableMultiStroke;
   
   auto o1 = _line(x1, y1, x2, y2, o, true, false);
@@ -306,7 +306,7 @@ std::vector<Op> _doubleLine(double x1, double y1, double x2, double y2, Options&
   return o1;
 }
 
-std::vector<Op> _line(double x1, double y1, double x2, double y2, Options& o, bool move, bool overlay) {
+std::vector<Op> _line(double x1, double y1, double x2, double y2, const Options& o, bool move, bool overlay) {
   const auto lengthSq = std::pow((x1 - x2), 2) + std::pow((y1 - y2), 2);
   const auto length = std::sqrt(lengthSq);
   double roughnessGain = 1;
@@ -377,7 +377,7 @@ std::vector<Op> _line(double x1, double y1, double x2, double y2, Options& o, bo
   return ops;
 }
 
-std::vector<Op> _curveWithOffset(const std::vector<Point>&  points, double offset, Options& o) {
+std::vector<Op> _curveWithOffset(const std::vector<Point>&  points, double offset, const Options& o) {
   std::vector<Point>  ps;
   ps.emplace_back(Point{
     points[0][0] + _offsetOpt(offset, o),
@@ -402,7 +402,7 @@ std::vector<Op> _curveWithOffset(const std::vector<Point>&  points, double offse
   return _curve(ps, {}, o);
 }
 
-std::vector<Op> _curve(const std::vector<Point>&  points, std::optional<Point> closePoint, Options& o) {
+std::vector<Op> _curve(const std::vector<Point>&  points, std::optional<Point> closePoint, const Options& o) {
   const auto len = points.size();
   std::vector<Op>  ops;
   if (len > 3) {
@@ -437,7 +437,7 @@ std::vector<Op> _curve(const std::vector<Point>&  points, std::optional<Point> c
   return ops;
 }
 
-ComputedEllipsePoints _computeEllipsePoints(double increment, double cx, double cy, double rx, double ry, double offset, double overlap, Options& o) {
+ComputedEllipsePoints _computeEllipsePoints(double increment, double cx, double cy, double rx, double ry, double offset, double overlap, const Options& o) {
   std::vector<Point>  corePoints;
   std::vector<Point>  allPoints;
   const auto radOffset = _offsetOpt(0.5, o) - (pi / 2);
@@ -470,7 +470,7 @@ ComputedEllipsePoints _computeEllipsePoints(double increment, double cx, double 
   return {allPoints, corePoints};
 }
 
-std::vector<Op> _arc(double increment, double cx, double cy, double rx, double ry, double strt, double stp, double offset, Options& o) {
+std::vector<Op> _arc(double increment, double cx, double cy, double rx, double ry, double strt, double stp, double offset, const Options& o) {
   const auto radOffset = strt + _offsetOpt(0.1, o);
   std::vector<Point> points;
   points.emplace_back(Point{
@@ -494,7 +494,7 @@ std::vector<Op> _arc(double increment, double cx, double cy, double rx, double r
   return _curve(points, {}, o);
 }
 
-std::vector<Op> _bezierTo(double x1, double y1, double x2, double y2, double x, double y, Point current, Options& o) {
+std::vector<Op> _bezierTo(double x1, double y1, double x2, double y2, double x, double y, Point current, const Options& o) {
   std::vector<Op>  ops;
   const std::array<double, 2> ros = {o.maxRandomnessOffset, o.maxRandomnessOffset + 0.3};
   auto f = Point{0, 0};

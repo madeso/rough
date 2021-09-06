@@ -43,7 +43,7 @@ void RoughSVG::draw(const Drawable& drawable) {
     svg::ElementRef path;
     switch (drawing.type) {
       case OpSetType::path:
-        path = svg::make_element("h");
+        path = svg::make_element("path");
         path->setAttribute("d", this->opsToPath(drawing, precision));
         path->setAttribute("stroke", o.stroke);
         path->setAttribute("stroke-width", std::to_string(o.strokeWidth));
@@ -56,7 +56,7 @@ void RoughSVG::draw(const Drawable& drawable) {
         }
         break;
       case OpSetType::fillPath:
-        path = svg::make_element("h");
+        path = svg::make_element("path");
         path->setAttribute("d", this->opsToPath(drawing, precision));
         path->setAttribute("stroke", "none");
         path->setAttribute("stroke-width", "0");
@@ -81,7 +81,7 @@ svg::ElementRef RoughSVG::fillSketch(const OpSet& drawing, const Options& o) {
   if (fweight < 0) {
     fweight = o.strokeWidth / 2;
   }
-  auto path = svg::make_element("h");
+  auto path = svg::make_element("path");
   path->setAttribute("d", this->opsToPath(drawing, o.fixedDecimalPlaceDigits));
   path->setAttribute("stroke", o.fill.value_or(""));
   path->setAttribute("stroke-width", std::to_string(fweight));

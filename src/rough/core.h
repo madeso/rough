@@ -46,7 +46,16 @@ struct Options {
   bool disableMultiStroke = false;
   bool disableMultiStrokeFill = false;
   bool preserveVertices = false;
-  std::optional<Random> randomizer;
+  mutable std::optional<Random> randomizer;
+
+  Options& set_fill(const std::string& str);
+  Options& set_fillStyle(FillStyle s);
+  Options& set_hachureGap(double i);
+  Options& set_fillWeight(double i);
+  Options& set_roughness(int i);
+  Options& set_hachureAngle(int i);
+  Options& set_stroke(const std::string& str);
+  Options& set_strokeWidth(int i);
 };
 
 enum class OpType { move, bcurveTo, lineTo};
