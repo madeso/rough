@@ -33,7 +33,7 @@ OpSet DotFiller::dotsOnLines(const std::vector<Line>& lines, const Options& o) {
     const auto length = lineLength(line);
     const auto dl = length / gap;
     const auto countf = std::ceil(dl) - 1;
-    const auto count = static_cast<std::size_t>(countf);
+    const auto count = countf > 0 ? static_cast<std::size_t>(countf) : 0;
     const auto offset = length - (count * gap);
     const auto x = ((line.from.x + line.to.x) / 2) - (gap / 4);
     const auto minY = std::min(line.from.y, line.to.y);
