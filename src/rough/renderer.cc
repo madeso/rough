@@ -9,8 +9,8 @@
 
 struct ComputedEllipsePoints
 {
-  std::vector<Point> corePoints;
   std::vector<Point> allPoints;
+  std::vector<Point> corePoints;
 };
 
 Options cloneOptionsAlterSeed(const Options& ops);
