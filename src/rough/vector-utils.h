@@ -10,7 +10,7 @@ void sort(std::vector<T>& vec, SortFunction&& sortFunction)
 {
     std::stable_sort(vec.begin(), vec.end(),
         [&sortFunction](const T& lhs, const T& rhs) {
-            return sortFunction(lhs, rhs) > 0;
+            return sortFunction(lhs, rhs) < 0;
         });
 }
 
