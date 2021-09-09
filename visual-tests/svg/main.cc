@@ -1,6 +1,8 @@
 #include "svg/tests.h"
 
 #include <fstream>
+#include <iostream>
+#include <functional>
 
 namespace html
 {
@@ -71,8 +73,10 @@ struct TestRunner
 
     std::optional<std::fstream> file;
 
-    void add(const std::string& name, const svg::Document& document)
+    void add(const std::string& name, const std::function<svg::Document ()>& generateDocument)
     {
+      std::cout << "Generating " << name << "..."<< std::endl;
+        const auto document = generateDocument();
         if (split_svg_tests)
         {
             std::string filename = name + ".svg";
@@ -118,10 +122,10 @@ struct TestRunner
 
 void run_tests(TestRunner* runner)
 {
-    runner->add("rectangle", rectangle_test());
-    runner->add("polygon", polygon_test());
-    runner->add("ellipse", ellipse_test());
-    runner->add("line", line_test());
+    runner->add("rectangle", rectangle_test);
+    runner->add("polygon", polygon_test);
+    runner->add("ellipse", ellipse_test);
+    runner->add("line", line_test);
 }
 
 int main(int argc, char** argv)
