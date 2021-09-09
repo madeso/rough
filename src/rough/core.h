@@ -31,8 +31,8 @@ struct Options {
   double bowing = 1;
   std::string stroke = "#000";
   double strokeWidth = 1;
-  double curveFitting = 0;
-  double curveTightness = 0.95;
+  double curveFitting = 0.95;
+  double curveTightness = 0;
   double curveStepCount = 9;
   FillStyle fillStyle = FillStyle::hachure;
   double fillWeight = -1;
