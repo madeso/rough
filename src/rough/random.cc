@@ -29,16 +29,16 @@ int randomSeed() {
   return generate_random_int();
 }
 
-Random::Random(std::optional<int> s)
+Random::Random(int s)
   : seed(s)
 {
 }
 
 double Random::next() {
-  if (seed.has_value()) {
+  if (seed != 0) {
     constexpr std::int64_t big = 0x80000000;
-    *seed = 48271 * *seed;
-    return static_cast<double>((big - 1) & *seed) / static_cast<double>(big);
+    seed = 48271 * seed;
+    return static_cast<double>((big - 1) & seed) / static_cast<double>(big);
   } else {
     return generate_random_double();
   }

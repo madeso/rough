@@ -6,9 +6,9 @@ int randomSeed();
 
 struct Random
 {
-  std::optional<int> seed;
+  int seed;
 
-  explicit Random(std::optional<int> seed);
+  explicit Random(int seed);
 
   double next();
 };
