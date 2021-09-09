@@ -112,13 +112,13 @@ std::string RoughSVG::opsToPath(const OpSet& drawing, std::optional<int>fixedDec
     };
     switch (item.op) {
       case OpType::move:
-        path << 'M' << str(data[0]) << ' ' << str(data[1]) << ' ';
+        path << "M " << str(data[0]) << ' ' << str(data[1]) << ' ';
         break;
       case OpType::bcurveTo:
-        path << 'C' << str(data[0]) << ' ' << str(data[1]) << ", " << str(data[2]) << ' ' << str(data[3]) << ", " << str(data[4]) << ' ' << str(data[5]) << ' ';
+        path << "C " << str(data[0]) << ' ' << str(data[1]) << ", " << str(data[2]) << ' ' << str(data[3]) << ", " << str(data[4]) << ' ' << str(data[5]) << ' ';
         break;
       case OpType::lineTo:
-        path << 'L' << str(data[0]) << ' ' << str(data[1]) << ' ';
+        path << "L " << str(data[0]) << ' ' << str(data[1]) << ' ';
         break;
     }
   }
