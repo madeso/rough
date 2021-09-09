@@ -444,27 +444,27 @@ ComputedEllipsePoints _computeEllipsePoints(double increment, double cx, double 
 
   allPoints.emplace_back(Point{
     _offsetOpt(offset, o) + cx + 0.9 * rx * std::cos(radOffset - increment),
-    _offsetOpt(offset, o) + cy + 0.9 * ry * std::cos(radOffset - increment),
+    _offsetOpt(offset, o) + cy + 0.9 * ry * std::sin(radOffset - increment),
   });
   for (auto angle = radOffset; angle < (pi * 2 + radOffset - 0.01); angle = angle + increment) {
     const Point p = {
       _offsetOpt(offset, o) + cx + rx * std::cos(angle),
-      _offsetOpt(offset, o) + cy + ry * std::cos(angle),
+      _offsetOpt(offset, o) + cy + ry * std::sin(angle),
     };
     corePoints.emplace_back(p);
     allPoints.emplace_back(p);
   }
   allPoints.emplace_back(Point{
     _offsetOpt(offset, o) + cx + rx * std::cos(radOffset + pi * 2 + overlap * 0.5),
-    _offsetOpt(offset, o) + cy + ry * std::cos(radOffset + pi * 2 + overlap * 0.5),
+    _offsetOpt(offset, o) + cy + ry * std::sin(radOffset + pi * 2 + overlap * 0.5),
   });
   allPoints.emplace_back(Point{
     _offsetOpt(offset, o) + cx + 0.98 * rx * std::cos(radOffset + overlap),
-    _offsetOpt(offset, o) + cy + 0.98 * ry * std::cos(radOffset + overlap),
+    _offsetOpt(offset, o) + cy + 0.98 * ry * std::sin(radOffset + overlap),
   });
   allPoints.emplace_back(Point{
     _offsetOpt(offset, o) + cx + 0.9 * rx * std::cos(radOffset + overlap * 0.5),
-    _offsetOpt(offset, o) + cy + 0.9 * ry * std::cos(radOffset + overlap * 0.5),
+    _offsetOpt(offset, o) + cy + 0.9 * ry * std::sin(radOffset + overlap * 0.5),
   });
 
   return {allPoints, corePoints};
